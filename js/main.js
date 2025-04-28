@@ -67,8 +67,8 @@ function updateTableAndDraw(){
             <td>${x0.toFixed(2)}</td>
             <td>${x1.toFixed(2)}</td>
             <td>${dx.toFixed(2)}</td>
-            <td>${fx0.toFixed(2)}</td>
-            <td>${fx1.toFixed(2)}</td>
+            <td>${fx0.toFixed(3)}</td>
+            <td>${fx1.toFixed(3)}</td>
         `;
         tableBody.appendChild(row);
         //push points to array 
@@ -98,79 +98,89 @@ function f(x) {
 function drawRiemannSum(points, a, b) { 
     // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     //determine the space of rectangle 
-    const marginLeft=50;
-    const marginRight=20;
-    const marginTop=20;
-    const marginBottom=40;
+    const marginLeft = 50;
+    const marginRight = 20;
+    const marginTop = 20;
+    const marginBottom = 40;
     const plotWidth = canvas.width - marginLeft - marginRight;
     const plotHeight = canvas.height - marginTop - marginBottom;
- // Determine scaling factors
- //
- const maxSup = Math.max(...points.map(p => p.sup));
- const scaleX = plotWidth / (b - a);
- const scaleY = plotHeight / maxSup ; // Assuming y starts from 0
+
+    // Determine scaling factors
+    //
+    const maxSup = Math.max(...points.map(p => p.sup));
+    const scaleX = plotWidth / (b - a);
+    const scaleY = plotHeight / maxSup; // Assuming y starts from 0
 
     // Draw the axes
-     ctx.strokeStyle = 'black';
+    ctx.strokeStyle = 'black';
     ctx.lineWidth = 1;
     ctx.beginPath();
-    //y-axis
-    ctx.moveTo(marginLeft,marginTop);
+    // y-axis
+    ctx.moveTo(marginLeft, marginTop);
     ctx.lineTo(marginLeft, canvas.height - marginBottom);
-    //x-axis
+    ctx.stroke();
+    
+    ctx.beginPath();
+    // x-axis
+    ctx.moveTo(marginLeft, canvas.height - marginBottom);
     ctx.lineTo(canvas.width - marginRight, canvas.height - marginBottom); // X-axis
     ctx.stroke();
+
     //Draw x-axis 
-    const n=points.Length;
-    ctx.font='12px sans-serif';
-    ctx.fillStyle='black';
-    ctx.textAlign='center';
-    ctx.textBaseline='top';
-    for(let i=0;i<n;i++){
-        const xVal=a+i*dx;
-        const xPos=marginLeft+scaleX*(xVal-a);
+    const n = points.length; 
+    const dx = (b - a) / n;  
+    ctx.font = '12px sans-serif';
+    ctx.fillStyle = 'black';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    
+    for (let i = 0; i <= n; i++) {
+        const xVal = a + i * dx;
+        const xPos = marginLeft + scaleX * (xVal - a);
         ctx.beginPath();
         ctx.moveTo(xPos, canvas.height - marginBottom);
         ctx.lineTo(xPos, canvas.height - marginBottom + 5); // Tick length
         ctx.stroke();
         //Label
         ctx.fillText(xVal.toFixed(2), xPos, canvas.height - marginBottom + 7); // Label position
-        
     }
-ctx.textAlign='right';
-   ctx.textBaseline='middle';
-   const yTicks=5;
-   for(let i=0;i<=yTicks;i++){
-       const yVal=(maxSup*i)/yTicks;
-       const yPos=canvas.height - marginBottom - yVal*scaleY;
-       ctx.beginPath();
-       ctx.moveTo(marginLeft-5,yPos);
-       ctx.lineTo(marginLeft,yPos);
-       ctx.stroke();
-       //Label
-       ctx.fillText(yVal.toFixed(2),marginLeft-7,yPos); // Label position
-   }
+
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    const yTicks = 5;
+    for (let i = 0; i <= yTicks; i++) {
+        const yVal = (maxSup * i) / yTicks;
+        const yPos = canvas.height - marginBottom - yVal * scaleY;
+        ctx.beginPath();
+        ctx.moveTo(marginLeft - 5, yPos);
+        ctx.lineTo(marginLeft, yPos);
+        ctx.stroke();
+        //Label
+        ctx.fillText(yVal.toFixed(2), marginLeft - 7, yPos); // Label position
+    }
+
     // Draw the rectangles for the Riemann sum
 
     ///Translate the points to canvas coordinates
     //lower Riemann sum
- ctx.fillStyle= '#09c';
- points.forEach(p=>{
-    const xCanvas=marginLeft+(p.x0-a)*scaleX;
-     const widthCanvas=(p.x1-p.x0)*scaleX;
-     const heightCanvas=p.inf*scaleY;
-     ctx.fillRect(xCanvas, canvas.height - marginBottom - heightCanvas, widthCanvas, heightCanvas);
-    })
-   
-//Draw upper sum rectangles
-ctx.fillStyle='tomato';
-ctx.globalAlpha=0.5; 
-points.forEach(p=>{
-    const xCanvas=marginLeft+(p.x0-a)*scaleX;
-    const widthCanvas=(p.x1-p.x0)*scaleX;
-    const heightCanvas=p.sup*scaleY;
-    ctx.fillRect(xCanvas, canvas.height - marginBottom - heightCanvas, widthCanvas, heightCanvas);
-});
-ctx.globalAlpha=1.0; 
+    ctx.fillStyle = '#09c';
+    points.forEach(p => {
+        const xCanvas = marginLeft + (p.x0 - a) * scaleX;
+        const widthCanvas = (p.x1 - p.x0) * scaleX;
+        const heightCanvas = p.inf * scaleY;
+        ctx.fillRect(xCanvas, canvas.height - marginBottom - heightCanvas, widthCanvas, heightCanvas);
+    });
+
+    //Draw upper sum rectangles
+    ctx.fillStyle = 'tomato';
+    ctx.globalAlpha = 0.5;
+    points.forEach(p => {
+        const xCanvas = marginLeft + (p.x0 - a) * scaleX;
+        const widthCanvas = (p.x1 - p.x0) * scaleX;
+        const heightCanvas = p.sup * scaleY;
+        ctx.fillRect(xCanvas, canvas.height - marginBottom - heightCanvas, widthCanvas, heightCanvas);
+    });
+    ctx.globalAlpha = 1.0;
 }
