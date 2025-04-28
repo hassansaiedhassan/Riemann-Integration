@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rieman</title>
+
+    <link rel="stylesheet" href="./css/all.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="./css/styl.css">
+
+
+</head>
+<body>
+    <section>
+        <div class="container text-center">
+            <h1 class="mt-5 fa-5x tomato-text" >Rieman integration </h1>
+        </div>
+        <div class="function-selector w-50 mx-auto">
+        <div class="function-controls">
+            <div class="function-list">
+                <label>
+                    <input type="radio" name="function" value="square" checked>
+                    <span class="function-label" id="a">f(x)=x<sup>2</sup></span>
+                </label>
+                <label>
+                    <input type="radio" name="function" value="inverse" checked>
+                    <span class="function-label" id="b">f(x)=1&frasl;x</span>
+                </label>
+            
+            </div>
+            <div class="integration-bounds">
+                <div class="bound">
+                  <label for="lower-bound">Lower Bound</label>
+                  <input type="number" id="lower-bound" value="0" step="0.1">
+                </div>
+                <div class="bound">
+                  <label for="upper-bound">Upper Bound</label>
+                  <input type="number" id="upper-bound" value="1" step="0.1">
+                </div>
+                <div class="bound">
+                  <label for="partitions">Partitions</label>
+                  <input type="number" id="partitions" value="10" min="1" max="100">
+                </div>
+              </div>
+        </div>
+    </div>
+    </section>
+   
+    <section class="visualization">
+        <div class="visualization-container">
+          <div class="visualization-panel">
+            <h3>Riemann Integration</h3>
+            <canvas id="riemann-canvas"></canvas>
+            <div class="approximation">
+              <span>Approximation:U: </span>
+              <span id="upper-sum">0</span>
+                <span> L: </span>
+                <span id="lower-sum">0</span>
+            </div>
+          </div>
+          </div>
+          </section>
+          <section>
+            <div class="container">
+                <div class="function-selector">
+                    <div class="function-controls">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>i</th>
+                                    <th>x<sub>j-1</sub></th>
+                                    <th>x<sub>j</sub></th>
+                                    <th>x<sub>j</sub>- x<sub>j-1</sub> </th>
+                                    <th>f(x<sub>j-1</sub>)</th>
+                                    <th>f(x<sub>j</sub>)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rieman-table-body">
+                                <!-- Rieman t  able rows will be dynamically generated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+          
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.9.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowchart.js"></script>
+    <script src="./js/all.min.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
