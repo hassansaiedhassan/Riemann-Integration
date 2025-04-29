@@ -1,8 +1,4 @@
-.tomato-text{
-    color: tomato ;
-    text-shadow: #000 1px 1px 2px;
-    font-size: 3em;
-}
+
 :root {
   --primary-color: #2563eb;
   --secondary-color: #3b82f6;
@@ -10,7 +6,7 @@
   --background-color: #ffffff;
   --text-color: #1f2937;
   --border-color: #e5e7eb;
-  --panel-background: #f8fafc;
+  --panel-background: #ecf1f6;
   --success-color: #22c55e;
   --error-color: #ef4444;
 }
@@ -57,11 +53,14 @@ header p {
   padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  gap: .5rem;
 }
 
 .function-selector h2 {
   margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  white-space: normal;
 }
 
 .function-controls {
@@ -80,6 +79,8 @@ header p {
   align-items: center;
   gap: 1rem;
   cursor: pointer;
+  font-size: 1rem;
+  flex-wrap: wrap;
 }
 
 .function-list input[type="radio"] {
@@ -111,12 +112,24 @@ header p {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-top: 1rem;
+
 }
 
 .bound label {
   font-size: 0.9rem;
   color: var(--text-color);
   opacity: 0.8;
+}
+.tomato-text{
+  color: tomato ;
+  text-shadow: #000 2px 3px 4px;
+  font-size: 3em;
+}
+.proposition{
+  color:var(--text-color);
+  font-size: 1.5em;
+  text-shadow: #000 1px 1px 2px;
 }
 
 .bound input {
@@ -256,6 +269,23 @@ footer {
 
   .tab-btn {
     padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 500px) {
+  .proposition {
+    font-size: 1rem;
+  }
+  .function-label {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .proposition {
+    font-size: 0.9rem;
+  }
+  .function-label {
     font-size: 0.9rem;
   }
 }

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/all.min.css">
     <link rel="stylesheet" href="./css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="./css/styl.css">
+    <link rel="stylesheet" href="./css/correct.css">
 
 
 </head>
@@ -16,9 +17,10 @@
         <div class="container text-center">
             <h1 class="mt-5 fa-5x tomato-text" >Rieman integration </h1>
         </div>
-        <div class="function-selector w-50 mx-auto">
-        <div class="function-controls">
-            <div class="function-list">
+        <div class="function-selector w-50  mx-auto">
+        <div class="function-controls w-100">
+            <div class="function-list w-100">
+                <p class="proposition">suppose f:[a,b]-> R is a bounded fn and p is a partition of [a,b] then please choose f:</p>
                 <label>
                     <input type="radio" name="function" value="square" checked>
                     <span class="function-label" id="a">f(x)=x<sup>2</sup></span>
@@ -31,11 +33,11 @@
             </div>
             <div class="integration-bounds">
                 <div class="bound">
-                  <label for="lower-bound">Lower Bound</label>
+                  <label for="lower-bound">Lower Bound a :</label>
                   <input type="number" id="lower-bound" value="0" step="0.1">
                 </div>
                 <div class="bound">
-                  <label for="upper-bound">Upper Bound</label>
+                  <label for="upper-bound">Upper Bound b:</label>
                   <input type="number" id="upper-bound" value="1" step="0.1">
                 </div>
                 <div class="bound">
@@ -51,13 +53,42 @@
         <div class="visualization-container">
           <div class="visualization-panel">
             <h3>Riemann Integration</h3>
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="h6">Note That:</h4>
+                <div class="position-relative p-2">
+                    <p>Upper Riemann Sum:</p>
+                    <div class="upper position-absolute"></div>
+                </div>
+                <div class="position-relative p-2">
+                    <p>lower Riemann Sum:</p>
+                    <div class="lower position-absolute"></div>
+                </div>
+                <div>
+
+                </div>
+            </div>
             <canvas id="riemann-canvas"></canvas>
             <div class="approximation">
-              <span>Approximation:U: </span>
-              <span id="upper-sum">0</span>
-                <span> L: </span>
+              <span>Approximation values: </span>
+              <div>
+                <span>U(f,p,[a,b]):</span>
+                <span id="upper-sum">0</span>
+              </div>
+             
+              <div>
+                <span> L(f,p,[a,b]): </span>
                 <span id="lower-sum">0</span>
+              </div>
+            <!--
+                <div>
+                    <span> l(f,p): </span>
+                    <span id="lower-integrable">0</span>
+                </div>
+       
+                <span> U(f,p): </span>
+                <span id="upper-integrable">0</span>
             </div>
+           -->
           </div>
           </div>
           </section>
@@ -72,8 +103,8 @@
                                     <th>x<sub>j-1</sub></th>
                                     <th>x<sub>j</sub></th>
                                     <th>x<sub>j</sub>- x<sub>j-1</sub> </th>
-                                    <th>f(x<sub>j-1</sub>)</th>
-                                    <th>f(x<sub>j</sub>)</th>
+                                    <th>inf F <sub>[x <sub> j-1</sub> , x<sub>j</sub> ]</sub></th>
+                                    <th>sup F <sub>[x <sub> j-1</sub> , x<sub>j</sub> ]</sub></th>
                                 </tr>
                             </thead>
                             <tbody id="rieman-table-body">
@@ -85,9 +116,7 @@
             </div>
         </section>
           
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@2.9.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flowchart.js"></script>
+
     <script src="./js/all.min.js"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
     <script src="./js/main.js"></script>

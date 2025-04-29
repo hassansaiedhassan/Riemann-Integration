@@ -59,7 +59,7 @@ function updateTableAndDraw(){
         const sup = Math.max(fx0, fx1);
         //احسب ال lower sum و upper sum
         lowerSum += dx * inf;
-        upperSum += dx * sup;
+        upperSum += dx* sup;
         //امسك ال row بتاعي
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -67,22 +67,25 @@ function updateTableAndDraw(){
             <td>${x0.toFixed(2)}</td>
             <td>${x1.toFixed(2)}</td>
             <td>${dx.toFixed(2)}</td>
-            <td>${fx0.toFixed(3)}</td>
-            <td>${fx1.toFixed(3)}</td>
+            <td>${inf.toFixed(3)}</td>
+            <td>${sup.toFixed(3)}</td>
         `;
         tableBody.appendChild(row);
         //push points to array 
-        points.push({ x0, x1, inf, sup });
+        points.push({ x0, x1, inf, sup,lowerSum,upperSum });
     }
-
+ 
     //عايزين نرسم 
     //هنعمل ازاي هنبعت ال x0 و x1 و inf و sup
     //هعمل function اسمها drawRiemannSum هتستقبل ال points و dx و inf و sup
-    document.getElementById('lower-sum').textContent = lowerSum.toFixed(2);
-    document.getElementById('upper-sum').textContent = upperSum.toFixed(2);
+    document.getElementById('lower-sum').textContent = lowerSum.toFixed(3);
+    document.getElementById('upper-sum').textContent = upperSum.toFixed(3);
+
     drawRiemannSum(points, a,b);
+    calcRiemannIntegrable(points,a,b);
 
 }
+
 function f(x) {
     // Define the selected function
     const selectedFunction = document.querySelector('input[name="function"]:checked').value;
@@ -95,6 +98,16 @@ function f(x) {
             return x;
     }
 }
+// function calcRiemannIntegrable(points,a,b){
+//     // Calculate the Riemann integrable value based on the points and bounds
+//     const maxSup = Math.min(...points.map(p => p.upperSum));
+//      const minInf = Math.max(...points.map(p => p.lowerSum));
+//      const LowerRiemannIntegrable=minInf;
+//      const UpperRiemannIntegrable=maxSup;
+//      document.getElementById('lower-integrable').textContent = LowerRiemannIntegrable.toFixed(3);
+//      document.getElementById('upper-integrable').textContent = UpperRiemannIntegrable.toFixed(3);
+// }
+
 function drawRiemannSum(points, a, b) { 
     // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);

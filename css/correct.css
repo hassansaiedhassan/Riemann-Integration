@@ -1,0 +1,57 @@
+ * {
+    box-sizing: border-box;
+  }
+  
+ 
+  
+
+
+  input[type="number"],
+  input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-top: 0.25rem;
+  }
+  
+  .bound {
+
+  } 
+  .upper{
+    width:10px;
+    height:10px;
+    top: 30%;
+    Right:-2%;
+    margin-left: 10px;
+    background-color: tomato;
+  }
+  .lower
+  {
+    width:10px;
+    height:10px;
+    top: 30%;
+    Right:-2%;
+    margin-left: 10px;
+    background-color: rgba(0, 153, 204, 0.484);
+  }
+
+  @media (max-width: 500px) {
+    h2 {
+      font-size: 1rem;
+    }
+  
+    .container {
+      padding: 1rem;
+    }
+  
+    label {
+      font-size: 0.95rem;
+    }
+  
+    input[type="number"],
+    input[type="text"] {
+      font-size: 0.95rem;
+    }
+  }
+  
